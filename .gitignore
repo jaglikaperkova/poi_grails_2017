@@ -1,3 +1,4 @@
 */.hg/*
 */.gitignore
 */*.*
+*/build/*

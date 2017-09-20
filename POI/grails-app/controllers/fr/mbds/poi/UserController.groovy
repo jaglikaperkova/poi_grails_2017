@@ -1,10 +1,15 @@
 package fr.mbds.poi
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
+
 class UserController {
+
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -17,6 +22,7 @@ class UserController {
         respond user
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         respond new User(params)
     }
@@ -47,11 +53,65 @@ class UserController {
     }
 
     def edit(User user) {
+        User u = User.findById(springSecurityService.currentUser.id)
+        println(u.authorities)
+
         respond user
     }
 
     @Transactional
+    def editByModerator(User user){
+        def msg
+        def flagStatus
+        if(springSecurityService.currentUser.id==user.id){
+            user.save flush: true
+            msg=message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+            flagStatus=OK
+        }
+        else if(user.authorities.any{it.authority=='ROLE_USER'}){
+            user.save flush: true
+            msg=message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+            flagStatus=OK
+        }
+        else {
+            transactionStatus.setRollbackOnly()
+            msg=message(code: 'default.not.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+            flagStatus=NOT_MODIFIED
+        }
+        request.withFormat {
+            form multipartForm {
+                flash.message = msg
+                redirect user
+            }
+            '*'{ respond user, [status: flagStatus] }
+        }
+    }
+    @Transactional
+    def editByUser(User user){
+        def msg
+        def flagStatus
+        if( springSecurityService.currentUser.id==user.id){
+            user.save flush:true
+            msg=message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+            flagStatus=OK
+        }
+        else{
+            transactionStatus.setRollbackOnly()
+            msg=message(code: 'default.not.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+            flagStatus=NOT_MODIFIED
+        }
+        request.withFormat {
+            form multipartForm {
+                flash.message = msg
+                redirect user
+            }
+            '*'{ respond user, [status: flagStatus] }
+        }
+    }
+
+    @Transactional
     def update(User user) {
+
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -64,18 +124,28 @@ class UserController {
             return
         }
 
-        user.save flush:true
+        if(principal.authorities.any{it.authority=='ROLE_MODERATOR'}){
+            editByModerator(user)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
-            }
-            '*'{ respond user, [status: OK] }
         }
+        else if(principal.authorities.any{it.authority=='ROLE_USER'}){
+            editByUser(user)
+        }
+        else if(principal.authorities.any{it.authority=='ROLE_ADMIN'}){
+            user.save flush:true
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                    redirect user
+                }
+                '*'{ respond user, [status: OK] }
+            }
+        }
+
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(User user) {
 
         if (user == null) {
@@ -84,7 +154,9 @@ class UserController {
             return
         }
 
-        user.delete flush:true
+        Collection<UserRole> userRoles = UserRole.findAllByUser(user);
+        userRoles*.delete();
+        user.delete(flush: true)
 
         request.withFormat {
             form multipartForm {

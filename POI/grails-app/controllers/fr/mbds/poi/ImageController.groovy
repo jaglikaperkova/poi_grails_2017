@@ -1,12 +1,15 @@
 package fr.mbds.poi
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.gorm.transactions.Transactional
 
 @Transactional (readOnly = true)
+@Secured(['isAuthenticated()'])
 class ImageController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -17,11 +20,26 @@ class ImageController {
         respond image
     }
 
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def create() {
         respond new Image(params)
     }
 
+    def list(){
+        respond Image.list()
+    }
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
+    def uploadImage(){
+        def file=request.getFile('uploadFile')
+        def nom = file.getOriginalFilename();
+        Image i = new Image(name: nom, url: nom).save(flush:true,failOnError:true)
+
+        file.transferTo(new File(grailsApplication.config.images.test.path + nom))
+        println(params.list())
+
+    }
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def save(Image image) {
         if (image == null) {
             //transactionStatus.setRollbackOnly()
@@ -46,11 +64,13 @@ class ImageController {
         }
     }
 
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def edit(Image image) {
         respond image
     }
 
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def update(Image image) {
         if (image == null) {
             transactionStatus.setRollbackOnly()
@@ -76,6 +96,7 @@ class ImageController {
     }
 
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def delete(Image image) {
 
         if (image == null) {

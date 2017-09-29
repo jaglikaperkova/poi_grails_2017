@@ -27,7 +27,7 @@
             </g:hasErrors>
             <g:form resource="${this.groupe}" method="POST">
                 <fieldset class="form">
-                    <f:all bean="groupe"/>
+                    <g:render template="groupeform"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

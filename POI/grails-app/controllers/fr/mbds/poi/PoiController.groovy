@@ -6,9 +6,10 @@ import static org.springframework.http.HttpStatus.*
 import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
+@Secured(['isAuthenticated()'])
 class PoiController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: ["POST","PUT"], delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -19,11 +20,17 @@ class PoiController {
         respond poi
     }
 
+    def list(){
+        respond Poi.list()
+    }
+
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def create() {
         respond new Poi(params)
     }
 
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def save(Poi poi) {
         if (poi == null) {
             transactionStatus.setRollbackOnly()
@@ -53,6 +60,7 @@ class PoiController {
     }
 
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def update(Poi poi) {
         if (poi == null) {
             transactionStatus.setRollbackOnly()
@@ -78,6 +86,7 @@ class PoiController {
     }
 
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def delete(Poi poi) {
 
         if (poi == null) {

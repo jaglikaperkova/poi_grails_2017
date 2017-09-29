@@ -8,9 +8,10 @@ import grails.gorm.transactions.Transactional
 
 
 @Transactional(readOnly = true)
+@Secured(['isAuthenticated()'])
 class GroupeController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -21,11 +22,16 @@ class GroupeController {
         respond groupe
     }
 
+    def list(){
+        respond Groupe.list()
+    }
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def create() {
         respond new Groupe(params)
     }
 
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def save(Groupe groupe) {
         if (groupe == null) {
             transactionStatus.setRollbackOnly()
@@ -50,11 +56,13 @@ class GroupeController {
         }
     }
 
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def edit(Groupe groupe) {
         respond groupe
     }
 
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def update(Groupe groupe) {
         if (groupe == null) {
             transactionStatus.setRollbackOnly()
@@ -79,7 +87,9 @@ class GroupeController {
         }
     }
 
+
     @Transactional
+    @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def delete(Groupe groupe) {
 
         if (groupe == null) {

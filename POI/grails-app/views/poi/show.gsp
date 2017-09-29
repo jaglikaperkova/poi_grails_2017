@@ -3,6 +3,7 @@
 <head>
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'poi.label', default: 'Poi')}" />
+
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -54,13 +55,19 @@
                 Longitude : <f:display  bean="poi" property="lng"/>
             </td>
             <td>
-                <f:display  bean="poi" property="lat"/>
+                Latitude :<f:display  bean="poi" property="lat"/>
             </td>
 
         </tr>
 
         <tr>
-            <f:display  bean="poi" property="groupes"/>
+            <td>
+                Groupe :
+            </td>
+            <td>
+                <f:display  bean="poi" property="groupes"/>
+            </td>
+
         </tr>
         <tr>
             <td>

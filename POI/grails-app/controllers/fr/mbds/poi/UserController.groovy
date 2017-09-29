@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.gorm.transactions.Transactional
 
 @Transactional(readOnly = true)
-@Secured(['isAuthenticated()'])
+
 class UserController {
 
     def springSecurityService
@@ -27,11 +27,7 @@ class UserController {
         respond new User(params)
     }
 
-    def list(){
-        render User.list()
-    }
     @Transactional
-    @Secured(['ROLE_ADMIN'])
     def save(User user) {
         if (user == null) {
             transactionStatus.setRollbackOnly()

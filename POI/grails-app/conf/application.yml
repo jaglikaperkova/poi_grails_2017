@@ -1,11 +1,8 @@
 ---
 grails:
+    #serverURL: "http://localhost:8080/${appName}"
 
     profile: web
-    controllers:
-            upload:
-                maxFileSize: 2000000
-                maxRequestSize: 2000000
     codegen:
         defaultPackage: poi
     spring:
@@ -18,7 +15,7 @@ grails:
             events: false
 
 server:
-    contextPath: '/projet'
+    contextPath: '/poi'
 info:
     app:
         name: '@info.app.name@'

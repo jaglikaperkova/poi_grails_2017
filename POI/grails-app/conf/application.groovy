@@ -4,7 +4,6 @@
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'fr.mbds.poi.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'fr.mbds.poi.UserRole'
 grails.plugin.springsecurity.authority.className = 'fr.mbds.poi.Role'
-
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
@@ -15,7 +14,17 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/js/**',       access: ['permitAll']],
 	[pattern: '/**/css/**',      access: ['permitAll']],
 	[pattern: '/**/images/**',   access: ['permitAll']],
-	[pattern: '/**/favicon.ico', access: ['permitAll']]
+	[pattern: '/**/favicon.ico', access: ['permitAll']],
+	[pattern: '/user/**',          access: ['ROLE_ADMIN','ROLE_MODERATOR','ROLE_USER']],
+	[pattern: '/groupe/**', access: ['ROLE_ADMIN','ROLE_MODERATOR']],
+	[pattern: '/poi/**', access: ['ROLE_ADMIN','ROLE_MODERATOR']],
+	[pattern: '/image/**', access: ['ROLE_ADMIN','ROLE_MODERATOR']],
+	[pattern: '/groupe/show/**', access: ['ROLE_USER']],
+	[pattern: '/poi/show/**', access: ['ROLE_USER']],
+	[pattern: '/image/show/**', access: ['ROLE_USER']],
+	[pattern: '/groupe/index', access: ['ROLE_USER']],
+	[pattern: '/poi/index', access: ['ROLE_USER']],
+	[pattern: '/image/index', access: ['ROLE_USER']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [
@@ -27,16 +36,3 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
 
-port = 7001
-//serverUrl = "http://localhost:" + port
-//serverApache = "C:/wamp64/www/POI"
-grails.serverUrl = "http://localhost:" + port
-grails.serverApache="C:/wamp64/www/POI"
-
-images.groupes.url=grails.serverUrl + "/POI/groupes/"
-images.groupes.path=grails.serverApache + "/groupes/"
-images.pois.url=grails.serverUrl + "/POI/pois/"
-images.pois.path=grails.serverApache + "/pois/"
-images.test.path = grails.serverApache + "/test/"
-images.test.url = grails.serverUrl + "/POI/test/"
-API_KEY="AIzaSyDm0dsqeJBhhE_2AjoKoKwiPmol5SEoBMs"

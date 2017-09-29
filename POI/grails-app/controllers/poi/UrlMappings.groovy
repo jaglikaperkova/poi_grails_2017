@@ -8,9 +8,9 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+        "/#\\"(view:"/index")
         "/login"(controller:"login",action: "login")
        "/"(view: "/index")
-        "/image/uploadImage" (controller: "image",action: "uploadImage")
         //"/"(controller: "login", action: "login")
         "500"(view:'/error')
         "404"(view:'/notFound')

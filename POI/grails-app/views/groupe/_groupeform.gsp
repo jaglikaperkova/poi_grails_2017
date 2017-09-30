@@ -60,7 +60,7 @@
     font-size: 20px;
 }
 </style>
-<table onscroll="true">
+<table >
 
     <tr>
         <td>
@@ -106,7 +106,7 @@
             <g:each in="${groupe.images}" var="p">
                 <div class="image_form" data-picture="${p.id}">
                     <span class="btn_delete_image glyphicon glyphicon-remove"></span>
-                    <img class="image" src="${grailsApplication.config.images.groupes.url + p.name}">
+                    <img class="image" height="100px" width="100px" src="${grailsApplication.config.images.groupes.url + p.name}">
                 </div>
             </g:each>
         </td>

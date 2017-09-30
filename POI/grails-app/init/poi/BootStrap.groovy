@@ -21,7 +21,16 @@ class BootStrap {
         def adminrole2 = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
         def adminuser2 = new User(username: 'user',password: 'password').save(flush: true, failOnError: true)
         UserRole.create(adminuser2,adminrole2,true);
-        int inx=0
+
+        def groupeInstance1 = new Groupe(nom:"Monuments").addToImages(new Image(name: "paris_galeries.jpg",url: "paris_galeries.jpg"))
+        def groupeInstance2 = new Groupe(nom:"Batiments").addToImages(new Image(name:"lyon_hoteldeville.jpg", url: "lyon_hoteldeville.jpg"))
+        groupeInstance1.addToPois(new Poi(nom:"KFC Monument", user: adminuser, adresse: "11 Route des dolines", lat: 15, long:-10, description: "KFC est nouveau grand monu")
+                .addToImages(new Image(name: "kfc_sa_hed_2016.jpg",url: "kfc_sa_hed_2016.jpg")))
+        groupeInstance1.save(flush: true, failOnError : true)
+        groupeInstance2.addToPois(new Poi(nom:"Golf St Philippe", user: moderatoruser2, adresse: "25 St Philippe Carrefour", lat: -22, long:18, description: "Ce golf est nouveau et permet lot of fun ")
+                .addToImages(new Image(name: "golfPark.jpg", url: "golfPark.jpg")).addToImages(new Image(name: "paris_galeries.jpg",url: "paris_galeries.jpg")))
+        groupeInstance2.save(flush: true, failOnError : true)
+       /* int inx=0
         (1..5).each {
             int groupIndex ->
                 def groupeInstance = new Groupe(nom: "Groupe Pois "+groupIndex.toString()).addToImages(new Image(name: "Koala.jpg",url: "koala.jpg"))
@@ -32,7 +41,7 @@ class BootStrap {
                         inx=inx+1
                 }
                 groupeInstance.save(flush: true, failOnError : true)
-        }
+        }*/
     }
     def destroy = {
     }

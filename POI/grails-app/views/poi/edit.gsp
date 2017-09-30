@@ -26,7 +26,7 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.poi}" method="PUT">
+            <g:uploadForm resource="${this.poi}" method="PUT">
                 <g:hiddenField name="version" value="${this.poi?.version}" />
                 <fieldset class="form">
                     <g:render template="poiform"/>
@@ -34,7 +34,7 @@
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>

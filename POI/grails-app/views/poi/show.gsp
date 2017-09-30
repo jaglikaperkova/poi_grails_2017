@@ -65,16 +65,12 @@
                 Groupe :
             </td>
             <td>
-                <f:display  bean="poi" property="groupes"/>
-            </td>
 
-        </tr>
-        <tr>
-            <td>
-                Images:
-            </td>
-            <td>
-                <f:display  bean="poi" property="images"/>
+                    <span class="property-value" aria-labelledby="${label}">
+                        <g:link controller="groupe" action="show" id="${poi.groupes.id}">
+                            ${poi.groupes.nom} </g:link></span>
+
+                <g:each in="${poi.groupes}" var="g"></g:each>
             </td>
 
         </tr>
@@ -87,9 +83,28 @@
             </td>
 
         </tr>
+        <tr>
+            <td>
+                Images :
+            </td>
+            <td>
+                <g:if test="${poi?.images}">
+
+                    <div class="form-group">
+                        <div class="container_pictures">
+                            <g:each in="${poi.images}" var="p">
+                                <img class="picture" height="100px" width="100px" name="${p.name}" src="${grailsApplication.config.images.pois.url + p.name}"/>
+                            </g:each>
+                        </div>
+                    </div>
+                </g:if>
+            </td>
+        </tr>
+
+    </table>
 
 
-    </table>            <g:form resource="${this.poi}" method="DELETE">
+    <g:form resource="${this.poi}" method="DELETE">
     <fieldset class="buttons">
         <g:link class="edit" action="edit" resource="${this.poi}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
         <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />

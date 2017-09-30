@@ -28,6 +28,7 @@ class ImageController {
     def list(){
         respond Image.list()
     }
+    /*
     @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def uploadImage(){
         def file=request.getFile('uploadFile')
@@ -37,7 +38,7 @@ class ImageController {
         file.transferTo(new File(grailsApplication.config.images.test.path + nom))
         println(params.list())
 
-    }
+    }*/
     @Transactional
     @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def save(Image image) {

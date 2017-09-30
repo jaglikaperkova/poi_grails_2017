@@ -26,14 +26,14 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.poi}" method="POST">
+            <g:uploadForm url="[resource:poi, action:'save']" method="POST">
                 <fieldset class="form">
                     <g:render template="poiform"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>

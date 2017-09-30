@@ -31,12 +31,11 @@ port = 7001
 //serverUrl = "http://localhost:" + port
 //serverApache = "C:/wamp64/www/POI"
 grails.serverUrl = "http://localhost:" + port
-grails.serverApache="C:/wamp64/www/POI"
-
-images.groupes.url=grails.serverUrl + "/POI/groupes/"
+grails.serverApache="C:/wamp64/www/myapp"
+images.groupes.url=grails.serverUrl + "/myapp/groupes/"
 images.groupes.path=grails.serverApache + "/groupes/"
-images.pois.url=grails.serverUrl + "/POI/pois/"
+images.pois.url=grails.serverUrl + "/myapp/pois/"
 images.pois.path=grails.serverApache + "/pois/"
 images.test.path = grails.serverApache + "/test/"
-images.test.url = grails.serverUrl + "/POI/test/"
+images.test.url = grails.serverUrl + "/test/"
 API_KEY="AIzaSyDm0dsqeJBhhE_2AjoKoKwiPmol5SEoBMs"

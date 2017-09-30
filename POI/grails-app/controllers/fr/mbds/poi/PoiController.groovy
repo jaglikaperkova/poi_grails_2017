@@ -44,6 +44,17 @@ class PoiController {
             return
         }
 
+        if(params.containsKey('uploadFile')){
+            List files = request.getFiles('uploadFile')
+            files.each {f->
+                if(!f.empty){
+                    def nom = f.getOriginalFilename()
+                    poi.addToImages(new Image(name: nom,url: nom))
+                    f.transferTo(new File(grailsApplication.config.images.pois.path + nom))
+                }
+            }
+        }
+
         poi.save flush:true
 
         request.withFormat {
@@ -72,6 +83,18 @@ class PoiController {
             transactionStatus.setRollbackOnly()
             respond poi.errors, view:'edit'
             return
+        }
+
+        if(params.containsKey('uploadFile')){
+            def file = request.getFile('uploadFile')
+            println(file)
+            //files.each {f->
+                if(!file.empty){
+                    def nom = file.getOriginalFilename()
+                    poi.addToImages(new Image(name: nom,url: nom))
+                    file.transferTo(new File(grailsApplication.config.images.pois.path + nom))
+                }
+            //}
         }
 
         poi.save flush:true

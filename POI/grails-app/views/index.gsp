@@ -6,15 +6,7 @@
 
 </head>
 <body>
-    <content tag="nav">
-        <sec:ifNotLoggedIn>
-           <li><a href="${createLink(controller:'login', action:'login')}">Login</a></li>
-        </sec:ifNotLoggedIn>
-        <sec:ifLoggedIn>
-            <li><a href="${createLink(controller:'login', action:'logout')}">Logout</a></li>
-        </sec:ifLoggedIn>
 
-    </content>
 
 <div id="content">
     <sec:ifNotLoggedIn>

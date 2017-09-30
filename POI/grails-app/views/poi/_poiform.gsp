@@ -1,5 +1,64 @@
 <%@ page import="fr.mbds.poi.Poi" %>
+<style>
 
+.container_pictures{
+    display: block;
+    text-align: center;
+}
+
+.picture_form{
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    margin: 5px;
+    vertical-align: middle;
+
+.btn_delete_picture{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-top: 4px;
+    margin-right: 4px;
+    color: white;
+    font-size: 16px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 3px;
+    cursor: pointer;
+}
+
+.btn_delete_picture:hover{
+    background-color: #d43f3a;
+    border: none;
+    color: white;
+}
+
+.picture{
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+}
+
+.contButtPictureLoader{
+    text-align: center;
+}
+
+.add-picture-loader{
+    color:#4cae4c;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.remove-picture-loader{
+    color:#cc3333;
+    cursor: pointer;
+    font-size: 20px;
+}
+</style>
 
 <table onscroll="true">
 

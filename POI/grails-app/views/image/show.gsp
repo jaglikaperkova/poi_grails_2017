@@ -1,3 +1,4 @@
+<%@ page import="fr.mbds.poi.Image" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +20,15 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
+
+            <g:if test="${this.image.url=="groupes"}">
+                <img src="${grailsApplication.config.images.groupes.url + this.image.name}"/>
+            </g:if>
+
+            <g:else >
+                <img src="${grailsApplication.config.images.pois.url + this.image.name}"/>
+            </g:else>
+
             <f:display bean="image" />
             <g:form resource="${this.image}" method="DELETE">
                 <fieldset class="buttons">

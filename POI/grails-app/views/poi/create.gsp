@@ -26,7 +26,8 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:uploadForm url="[resource:poi, action:'save']" method="POST">
+            <!--g:uploadForm url="[resource:poi, action:'save']" method="POST"-->
+            <g:uploadForm resource="${this.poi}" method="POST">
                 <fieldset class="form">
                     <g:render template="poiform"/>
                 </fieldset>

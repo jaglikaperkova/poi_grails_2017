@@ -25,6 +25,7 @@ class GroupeController {
     def list(){
         respond Groupe.list()
     }
+
     @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def create() {
         respond new Groupe(params)
@@ -45,6 +46,17 @@ class GroupeController {
             return
         }
 
+        if(params.containsKey('uploadFile')){
+            def file = request.getFile('uploadFile')
+            println(file)
+            //files.each {f->
+            if(!file.empty){
+                def nom = file.getOriginalFilename()
+                groupe.addToImages(new Image(name: nom,url: nom))
+                file.transferTo(new File(grailsApplication.config.images.groupes.path + nom))
+            }
+            //}
+        }
         groupe.save flush:true
 
         request.withFormat {
@@ -75,6 +87,17 @@ class GroupeController {
             respond groupe.errors, view:'edit'
             return
         }
+        if(params.containsKey('uploadFile')){
+            def file = request.getFile('uploadFile')
+            println(file)
+            //files.each {f->
+            if(!file.empty){
+                def nom = file.getOriginalFilename()
+                groupe.addToImages(new Image(name: nom,url: nom))
+                file.transferTo(new File(grailsApplication.config.images.groupes.path + nom))
+            }
+            //}
+        }
 
         groupe.save flush:true
 
@@ -98,6 +121,13 @@ class GroupeController {
             return
         }
 
+        for(int i=0;i<groupe.pois.size();i++){
+            groupe.pois.remove(i)
+        }
+        Set<Image> images = groupe.images
+        for(int j=0;j<images.size();j++){
+            images.getAt(j).delete()
+        }
         groupe.delete flush:true
 
         request.withFormat {

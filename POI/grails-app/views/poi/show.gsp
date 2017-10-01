@@ -67,10 +67,13 @@
             <td>
 
                     <span class="property-value" aria-labelledby="${label}">
-                        <g:link controller="groupe" action="show" id="${poi.groupes.id}">
-                            ${poi.groupes.nom} </g:link></span>
+                        <g:each in="${poi.groupes}" var="g">
+                            <g:link controller="groupe" action="show" id="${g.id}">
+                                ${g.nom} </g:link></span>
+                        </g:each>
 
-                <g:each in="${poi.groupes}" var="g"></g:each>
+
+
             </td>
 
         </tr>
@@ -93,7 +96,11 @@
                     <div class="form-group">
                         <div class="container_pictures">
                             <g:each in="${poi.images}" var="p">
-                                <img class="picture" height="100px" width="100px" name="${p.name}" src="${grailsApplication.config.images.pois.url + p.name}"/>
+                                <div class="row">
+                                    <img class="picture" height="100px" width="100px" name="${p.name}" src="${grailsApplication.config.images.pois.url + p.name}"/>
+                                    <g:link controller="image" id="${p.id}" action="show">View</g:link>
+                                </div>
+
                             </g:each>
                         </div>
                     </div>

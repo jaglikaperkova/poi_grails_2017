@@ -2,6 +2,9 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <asset:javascript src="images.js"/>
+        <asset:javascript src="jquery-2.2.0.min.js"/>
         <g:set var="entityName" value="${this.poi.nom}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
@@ -26,7 +29,7 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:uploadForm resource="${this.poi}" method="PUT">
+            <g:uploadForm url="[resource: poi, action: 'update']" method="POST">
                 <g:hiddenField name="version" value="${this.poi?.version}" />
                 <fieldset class="form">
                     <g:render template="poiform"/>

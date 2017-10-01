@@ -22,8 +22,26 @@ class PoiController {
 
     def list(){
         respond Poi.list()
+
+    }
+    def getImagesByPoi(Poi poi){
+        def map = [:]
+        for(int i=0;i<poi.images.size();i++){
+            map.put(poi.images.getAt(i),"poi")
+        }
+        return map
     }
 
+
+    def containsImage(Image image){
+        Set<Image> setIm
+        setIm.add(image)
+        if(Poi.findByImages(setIm)!= null){
+            return true
+        }
+        else
+            return false
+    }
     @Secured(['ROLE_MODERATOR', 'ROLE_ADMIN'])
     def create() {
         respond new Poi(params)
@@ -118,6 +136,16 @@ class PoiController {
             return
         }
 
+        List <Groupe> groupes = Groupe.list();
+        for(int i=0;i<groupes.size();i++){
+            if(groupes.get(i).pois.contains(poi)){
+                groupes.get(i).pois.remove(poi)
+            }
+        }
+        for(int j=0;j<poi.images.size();j++){
+
+            poi.images.getAt(j).delete()
+        }
         poi.delete flush:true
 
         request.withFormat {

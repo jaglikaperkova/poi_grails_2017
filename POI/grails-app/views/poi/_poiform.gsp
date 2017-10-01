@@ -48,11 +48,11 @@
             <span class="required-indicator">*</span>
         </td>
         <td>
-            <g:select class="form-control" id="groupes" name="groupes" from="${fr.mbds.poi.Groupe.list()}"
+            <g:select  multiple="multiple" id="groupe" name="groupes" from="${fr.mbds.poi.Groupe.list()}"
                       optionKey="id"
                       required=""
                       optionValue="nom"
-                      value="${poi?.groupes}"/>
+                      value="${poi?.groupes*.id}"/>
         </td>
     </tr>
     <tr>
@@ -78,16 +78,25 @@
             <label class="col-sm-3 control-label">Pictures</label>
         </td>
         <td>
-            <g:each in="${poi.images}" var="p">
-                    <span class="btn_delete_picture glyphicon glyphicon-remove"></span>
-                    <img name="pictures" class="picture" height="100px" width="100px" src="${grailsApplication.config.images.pois.url + p.name}"/>
-            </g:each>
-            <div class="contButtPictureLoader">
-                <span class="glyphicon glyphicon-plus-sign add-picture-loader"></span>
-                <span class="glyphicon glyphicon-minus-sign remove-picture-loader"></span>
+            <div class="class_images" data-type="poi">
+                <g:each in="${poi.images}" var="p">
+                    <div class="image_form" data-picture="${p.id}">
+
+                        <img name="images" class="class_image" height="100px" width="100px" src="${grailsApplication.config.images.pois.url + p.name}"/>
+                    </div>
+                </g:each>
             </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
             <div class="col-sm-3 list-picture-loader">
                 <input type="file" name="uploadFile"/>
+            </div>
+        </td>
+        <td>
+            <div class="contButtPictureLoader">
             </div>
         </td>
     </tr>

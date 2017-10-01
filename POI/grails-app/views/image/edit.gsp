@@ -1,3 +1,4 @@
+<%@ page import="fr.mbds.poi.Image" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +27,7 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.image}" method="PUT">
+            <g:uploadForm resource="${this.image}" method="PUT">
                 <g:hiddenField name="version" value="${this.image?.version}" />
                 <fieldset class="form">
                     <f:all bean="image"/>
@@ -34,7 +35,7 @@
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>

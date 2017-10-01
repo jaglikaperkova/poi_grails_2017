@@ -68,7 +68,7 @@
             <span class="required-indicator">*</span>
         </td>
         <td>
-            <g:textField name="name" class="form-control" required="" value="${groupe?.nom}"/>
+            <g:textField name="nom" class="form-control" required="" value="${groupe?.nom}"/>
         </td>
     </tr>
     <tr>
@@ -89,15 +89,18 @@
                             params="['groupe.id': groupe?.id]">${message(code: 'default.add.label', args: [message(code: 'poi.label', default: 'Poi')])}</g:link>
                 </p>
             </div>
+            <g:select class="many-to-many" id="poi" name="pois" multiple="multiple" from="${fr.mbds.poi.Poi.list()}"
+                            optionKey="id"
+                            required=""
+                            optionValue="nom"
+                            value="${groupe?.pois*.id}"/>
+
         </td>
     </tr>
     <tr>
         <td>
             <g:message code="groupe.label.images" default="Images"/>
-            <div class="contButtImageLoader">
-            <span class="glyphicon glyphicon-plus-sign add-image-loader"></span>
-            <span class="glyphicon glyphicon-minus-sign remove-image-loader"></span>
-            </div>
+
             <div class="col-sm-3 list-picture-loader">
                 <input type="file" name="uploadFile"/>
             </div>
@@ -105,7 +108,6 @@
         <td>
             <g:each in="${groupe.images}" var="p">
                 <div class="image_form" data-picture="${p.id}">
-                    <span class="btn_delete_image glyphicon glyphicon-remove"></span>
                     <img class="image" height="100px" width="100px" src="${grailsApplication.config.images.groupes.url + p.name}">
                 </div>
             </g:each>

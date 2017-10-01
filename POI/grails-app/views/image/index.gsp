@@ -1,3 +1,4 @@
+<%@ page import="grails.converters.JSON" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,13 +14,31 @@
                 <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
-        <div id="list-image" class="content scaffold-list" role="main">
+        <div id="list-image"  role="main">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${imageList}" />
+            <table class="table">
+                <g:each in="${fr.mbds.poi.Image.list()}" var="i">
 
+                    <tr>
+                        <td title="Image">
+                            <g:if test="${i.url=="groupes" && fr.mbds.poi.Image.list().contains(i)}">
+                                <img class="picture" height="100px" width="100px" src="${grailsApplication.config.images.groupes.url + i.name}"/>
+                            </g:if>
+                            <g:elseif test="${i.url=="pois" && fr.mbds.poi.Image.list().contains(i)}">
+                                <img class="picture" height="100px" width="100px" src="${grailsApplication.config.images.pois.url + i.name}"/>
+                            </g:elseif>
+                        </td>
+                        <td title="Link">
+                            <g:link controller="image" action="show" id="${i.id}">View</g:link>
+                        </td>
+
+                    </tr>
+
+                </g:each>
+            </table>
             <div class="pagination">
                 <g:paginate total="${imageCount ?: 0}" />
             </div>

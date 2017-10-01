@@ -4,6 +4,8 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'groupe.label', default: 'Groupe')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
     </head>
     <body>
         <a href="#create-groupe" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -25,14 +27,14 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.groupe}" method="POST">
+            <g:uploadForm resource="${this.groupe}" method="POST">
                 <fieldset class="form">
                     <g:render template="groupeform"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>

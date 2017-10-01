@@ -47,6 +47,10 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.5.Final"
     compile "org.grails.plugins:gsp"
     compile "org.grails.plugins:spring-security-core:3.2.0.M1"
+    //BootStrap Twitter css
+    //compile "org.grails.plugins:twitter-bootstrap:3.3.0"
+   // runtime ':twitter-bootstrap:3.3.5'
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
     console "org.grails:grails-console"
     profile "org.grails.profiles:web"
     runtime "org.glassfish.web:el-impl:2.1.2-b03"

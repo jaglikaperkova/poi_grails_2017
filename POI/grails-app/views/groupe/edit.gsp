@@ -4,6 +4,8 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'groupe.label', default: 'Groupe')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
     </head>
     <body>
         <a href="#edit-groupe" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -26,7 +28,7 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.groupe}" method="PUT">
+            <g:uploadForm url="[resource: groupe, action: 'update']" method="POST">
                 <g:hiddenField name="version" value="${this.groupe?.version}" />
                 <fieldset class="form">
                     <g:render template="groupeform"/>
@@ -34,7 +36,7 @@
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>

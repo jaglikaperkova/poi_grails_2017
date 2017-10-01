@@ -22,13 +22,13 @@ class BootStrap {
         def adminuser2 = new User(username: 'user',password: 'password').save(flush: true, failOnError: true)
         UserRole.create(adminuser2,adminrole2,true);
 
-        def groupeInstance1 = new Groupe(nom:"Monuments").addToImages(new Image(name: "paris_galeries.jpg",url: "paris_galeries.jpg"))
-        def groupeInstance2 = new Groupe(nom:"Batiments").addToImages(new Image(name:"lyon_hoteldeville.jpg", url: "lyon_hoteldeville.jpg"))
+        def groupeInstance1 = new Groupe(nom:"Monuments").addToImages(new Image(name: "paris_galeries.jpg",url: "groupes"))
+        def groupeInstance2 = new Groupe(nom:"Batiments").addToImages(new Image(name:"lyon_hoteldeville.jpg", url: "groupes"))
         groupeInstance1.addToPois(new Poi(nom:"KFC Monument", user: adminuser, adresse: "11 Route des dolines", lat: 15, long:-10, description: "KFC est nouveau grand monu")
-                .addToImages(new Image(name: "kfc_sa_hed_2016.jpg",url: "kfc_sa_hed_2016.jpg")))
+                .addToImages(new Image(name: "kfc_sa_hed_2016.jpg",url: "pois")))
         groupeInstance1.save(flush: true, failOnError : true)
         groupeInstance2.addToPois(new Poi(nom:"Golf St Philippe", user: moderatoruser2, adresse: "25 St Philippe Carrefour", lat: -22, long:18, description: "Ce golf est nouveau et permet lot of fun ")
-                .addToImages(new Image(name: "golfPark.jpg", url: "golfPark.jpg")).addToImages(new Image(name: "paris_galeries.jpg",url: "paris_galeries.jpg")))
+                .addToImages(new Image(name: "golfPark.jpg", url: "pois")))
         groupeInstance2.save(flush: true, failOnError : true)
        /* int inx=0
         (1..5).each {

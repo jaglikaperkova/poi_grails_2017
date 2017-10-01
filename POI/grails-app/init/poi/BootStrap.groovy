@@ -24,6 +24,8 @@ class BootStrap {
 
         def groupeInstance1 = new Groupe(nom:"Monuments").addToImages(new Image(name: "paris_galeries.jpg",url: "groupes"))
         def groupeInstance2 = new Groupe(nom:"Batiments").addToImages(new Image(name:"lyon_hoteldeville.jpg", url: "groupes"))
+        def groupeInstance3 = new Groupe(nom:"Parcs").addToImages(new Image(name: "toto.jpg",url: "groupes"))
+        def groupeInstance4 = new Groupe(nom:"Restaurants").addToImages(new Image(name:"titi.jpg", url: "groupes"))
         groupeInstance1.addToPois(new Poi(nom:"KFC Monument", user: adminuser, adresse: "11 Route des dolines", lat: 15, long:-10, description: "KFC est nouveau grand monu")
                 .addToImages(new Image(name: "kfc_sa_hed_2016.jpg",url: "pois")))
         groupeInstance1.save(flush: true, failOnError : true)

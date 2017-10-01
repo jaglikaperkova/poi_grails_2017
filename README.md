@@ -14,6 +14,8 @@ WAMP Serveur pour les images:
   pour l'emplacement des images des groupes:
     http://localhost:7001/app/groupes
     
+Cettes modifications sont faites dans le fichier: POI\grails-app\conf\application.groovy
+
 
 
 

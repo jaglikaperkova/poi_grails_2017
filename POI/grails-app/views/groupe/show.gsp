@@ -25,6 +25,7 @@
         <f:display  bean="groupe" property="images"/>
 
     </ol>
+
     <g:form resource="${this.groupe}" method="DELETE">
         <fieldset class="buttons">
             <g:link class="edit" action="edit" resource="${this.groupe}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

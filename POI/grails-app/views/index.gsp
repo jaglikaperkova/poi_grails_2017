@@ -1,10 +1,14 @@
+<%@ page import="fr.mbds.poi.Poi" %>
 <!doctype html>
 <html>
 <head>
     <meta name="layout" content="main"/>
     <title>Points d'interet</title>
-    <asset:javascript src="index.js"/>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaYjfpRuvx3WWn7_OdWTaCmH26SjquKV0&callback=initMap"></script>
+    <asset:stylesheet src="jquery-3.2.1.min.js"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+
+
 </head>
 <body>
 
@@ -32,13 +36,46 @@
 
             </g:each>
         </nav>
-            <div class="map"></div>
+
+
         </div>
 
     </sec:ifLoggedIn>
 
 </div>
+<div id="map">
+</div>
 
+<script type="application/javascript">
+    <g:applyCodec encodeAs="none">
+    var poisList = ${Poi.list() as grails.converters.JSON}
+        </g:applyCodec>
+        console.log(poisList);
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 46, lng: 5},
+            zoom: 5
+        });
+        for(var i=0;i<Object.keys(poisList).length;i++) {
+            console.log(poisList[i].nom);
+            var myLatlng = new google.maps.LatLng(poisList[i].lat,poisList[i].lng);
+            // Création du Marker
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title:  poisList[i].nom
+            });
+
+            marker.setMap(map);
+        }
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyV8_Z6hw9b9WXEtzFNgp7K9Qpt_--L9Q&callback=initMap"></script>
+
+<!--asset:javascript src="map.js"/-->
+<!--asset:javascript src="index.js"/>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaYjfpRuvx3WWn7_OdWTaCmH26SjquKV0&callback=initMap"></script-->
 
 </body>
 </html>

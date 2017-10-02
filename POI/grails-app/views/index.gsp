@@ -66,7 +66,10 @@
                 map: map,
                 title:  poisList[i].nom
             });
-
+            google.maps.event.addListener(marker, 'dragend', function (event) {
+               console.log(this.getPosition().lat());
+                console.log(this.getPosition().lng());
+            });
             marker.setMap(map);
         }
     }

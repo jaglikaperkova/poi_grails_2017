@@ -26,6 +26,36 @@
 
     </ol>
 
+    <div id="map" style="width: 90%;height:400px">
+    </div>
+
+    <script type="application/javascript">
+        <g:applyCodec encodeAs="none">
+        var poisList = ${this.groupe.pois as grails.converters.JSON}
+            </g:applyCodec>
+            console.log(poisList);
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 46, lng: 5},
+                zoom: 3
+            });
+            for(var i=0;i<Object.keys(poisList).length;i++) {
+                console.log(poisList[i].nom);
+                var myLatlng = new google.maps.LatLng(poisList[i].lat,poisList[i].lng);
+                // Création du Marker
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title:  poisList[i].nom
+                });
+
+                marker.setMap(map);
+            }
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyV8_Z6hw9b9WXEtzFNgp7K9Qpt_--L9Q&callback=initMap"></script>
+
     <g:form resource="${this.groupe}" method="DELETE">
         <fieldset class="buttons">
             <g:link class="edit" action="edit" resource="${this.groupe}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

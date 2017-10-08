@@ -61,7 +61,7 @@
                 <span class="required-indicator">*</span>
             </td>
             <td>
-                <g:field name="lng" class="form-control" type="number" pattern="[0-9]+\\.[0-9]+" step="0.0001" value="${poi.lng}" required=""/>
+                <g:field name="lng" class="form-control" type="number" pattern="[0-9]+\\.[0-9]+" step="any" value="${(int)poi.lng}" required=""/>
             </td>
         </tr>
         <tr>
@@ -70,7 +70,7 @@
                 <span class="required-indicator">*</span>
             </td>
             <td>
-                <g:field name="lat" class="form-control" type="number" pattern="[0-9]+\\.[0-9]+" step="0.0001" value="${poi.lat}" required=""/>
+                <g:field name="lat" class="form-control" type="number" pattern="[0-9]+\\.[0-9]+" step="any" value="${(int)poi.lat}" required=""/>
             </td>
         </tr>
         <tr>

@@ -110,7 +110,42 @@
 
     </table>
 
+    <div id="map" style="width: 100%;height:400px">
 
+
+    <script type="application/javascript">
+        <g:applyCodec encodeAs="none">
+        var poi = ${this.poi as grails.converters.JSON}
+            console.log(poi);
+        </g:applyCodec>
+
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: poi.lat, lng: poi.lng},
+                zoom: 5
+            });
+            var myLatlng = new google.maps.LatLng(poi.lat,poi.lng);
+            // Création du Marker
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                //draggable: true,
+                map: map,
+                title:  poi.nom
+            });
+            google.maps.event.addListener(marker, 'dragend', function (event) {
+                poi.lat= this.getPosition().lat();
+                console.log(poi.lat);
+                poi.lng= this.getPosition().lng();
+                console.log(poi.lng);
+            });
+            marker.setMap(map);
+
+        }
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyV8_Z6hw9b9WXEtzFNgp7K9Qpt_--L9Q&callback=initMap"></script>
+    </div>
     <g:form resource="${this.poi}" method="DELETE">
     <fieldset class="buttons">
         <g:link class="edit" action="edit" resource="${this.poi}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

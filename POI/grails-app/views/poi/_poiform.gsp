@@ -61,7 +61,7 @@
                 <span class="required-indicator">*</span>
             </td>
             <td>
-                <g:field name="lng" class="form-control" type="number" pattern="[0-9]+,[0-9]+" step="any" value="${(int)poi.lng}" required=""/>
+                <g:field name="lng" class="form-control" type="number" pattern="[0-9]+\\.[0-9]+" step="0.0001" value="${poi.lng}" required=""/>
             </td>
         </tr>
         <tr>
@@ -70,7 +70,7 @@
                 <span class="required-indicator">*</span>
             </td>
             <td>
-                <g:field name="lat" class="form-control" type="number" pattern="[0-9]+,[0-9]+" step="any" value="${(int)poi.lat}" required=""/>
+                <g:field name="lat" class="form-control" type="number" pattern="[0-9]+\\.[0-9]+" step="0.0001" value="${poi.lat}" required=""/>
             </td>
         </tr>
         <tr>
@@ -104,37 +104,7 @@
 
 </div>
 
-<div id="map" style="width: 100%;height:400px">
-</div>
 
-<script type="application/javascript">
-    <g:applyCodec encodeAs="none">
-    var poi = ${this.poi}
-        </g:applyCodec>
-        console.log(poisList);
-
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: poi.lat, lng: poi.lng},
-            zoom: 5
-        });
-            var myLatlng = new google.maps.LatLng(poi.lat,poi.lng);
-            // Création du Marker
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                draggable: true,
-                map: map,
-                title:  poi.nom
-            });
-            google.maps.event.addListener(marker, 'dragend', function (event) {
-                console.log(this.getPosition().lat());
-                console.log(this.getPosition().lng());
-            });
-            marker.setMap(map);
-
-    }
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyV8_Z6hw9b9WXEtzFNgp7K9Qpt_--L9Q&callback=initMap"></script>
 
 
 

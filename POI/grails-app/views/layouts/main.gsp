@@ -7,19 +7,21 @@
         <g:layoutTitle default="POI"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <asset:stylesheet src="application.css"/>
+    <asset:stylesheet src="main.css"/>
 
     <g:layoutHead/>
 </head>
 <body>
 
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="navbar navbar-default navbar-static-top" role="navigation" >
 
         <div class="container">
             <div class="navbar-header">
 
-                <a class="navbar-brand" href="/projet">
+                <a class="buttons" href="/projet">
                     <i class="fa grails-icon">
                         <asset:image src="grails-cupsonly-logo-white.svg"/>
                     </i> POI
@@ -35,10 +37,10 @@
 
                     <g:pageProperty name="page.nav" />
                     <sec:ifNotLoggedIn>
-                        <a href="${createLink(controller:'login', action:'login')}">Login</a>
+                        <a class="buttons" href="${createLink(controller:'login', action:'login')}">Login</a>
                     </sec:ifNotLoggedIn>
                     <sec:ifLoggedIn>
-                        <a href="${createLink(controller:'login', action:'logout')}">Logout</a>
+                        <a class="buttons" href="${createLink(controller:'login', action:'logout')}">Logout</a>
                     </sec:ifLoggedIn>
                 </ul>
             </div>

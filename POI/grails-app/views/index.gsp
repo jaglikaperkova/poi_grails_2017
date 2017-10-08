@@ -43,37 +43,38 @@
     </sec:ifLoggedIn>
 
 </div>
-<div id="map" style="width: 100%;height:400px">
-</div>
+<sec:ifLoggedIn>
+    <div id="map" style="width: 100%;height:400px">
+    </div>
+    <script type="application/javascript">
+        <g:applyCodec encodeAs="none">
+        var poisList = ${Poi.list() as grails.converters.JSON}
+            </g:applyCodec>
+            console.log(poisList);
 
-<script type="application/javascript">
-    <g:applyCodec encodeAs="none">
-    var poisList = ${Poi.list() as grails.converters.JSON}
-        </g:applyCodec>
-        console.log(poisList);
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 46, lng: 5},
+                zoom: 5
+            });
+            for(var i=0;i<Object.keys(poisList).length;i++) {
+                console.log(poisList[i].nom);
+                var myLatlng = new google.maps.LatLng(poisList[i].lat,poisList[i].lng);
+                // Création du Marker
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title:  poisList[i].nom
+                });
 
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 46, lng: 5},
-            zoom: 5
-        });
-        for(var i=0;i<Object.keys(poisList).length;i++) {
-            console.log(poisList[i].nom);
-            var myLatlng = new google.maps.LatLng(poisList[i].lat,poisList[i].lng);
-            // Création du Marker
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title:  poisList[i].nom
-            });
-            google.maps.event.addListener(marker, 'dragend', function (event) {
-               console.log(this.getPosition().lat());
-                console.log(this.getPosition().lng());
-            });
-            marker.setMap(map);
+                marker.setMap(map);
+            }
         }
-    }
-</script>
+    </script>
+</sec:ifLoggedIn>
+
+
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyV8_Z6hw9b9WXEtzFNgp7K9Qpt_--L9Q&callback=initMap"></script>
 
 <!--asset:javascript src="map.js"/-->

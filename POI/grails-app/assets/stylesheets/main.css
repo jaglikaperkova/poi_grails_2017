@@ -36,9 +36,9 @@ body {
     background: #ffffff;
     color: #333333;
     overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
-    -moz-box-shadow: 0 0 0.3em #4D8618;
-    -webkit-box-shadow: 0 0 0.3em #4D8618;
-    box-shadow: 0 0 0.3em #4D8618;
+    -moz-box-shadow: 0 0 0.3em #507586;
+    -webkit-box-shadow: 0 0 0.3em #328686;
+    box-shadow: 0 0 0.3em #798caa;
 }
 
 #grailsLogo {
@@ -84,7 +84,7 @@ img {
 }
 
 .footer {
-    background: #48802c;
+    background: #d7c0ef;
     color: #000;
     clear: both;
     font-size: 0.8em;
@@ -94,7 +94,7 @@ img {
 }
 
 .footer a {
-    color: #4D8618;
+    color: #d7c0ef;
 }
 
 .spinner {
@@ -129,7 +129,7 @@ img {
 }
 
 .nav a {
-    color: #666666;
+    color: #454366;
     display: block;
     padding: 0.25em 0.7em;
     text-decoration: none;
@@ -139,7 +139,7 @@ img {
 }
 
 .nav a:active, .nav a:visited {
-    color: #666666;
+    color: #656466;
 }
 
 .nav a:focus, .nav a:hover {
@@ -492,12 +492,12 @@ th:hover, tr:hover {
 /* ACTION BUTTONS */
 
 .buttons {
-    background-color: #efefef;
+    background-color: #d7c0ef;
     overflow: hidden;
     padding: 0.3em;
-    -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-    -webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-    box-shadow: 0 0 3px 1px #aaaaaa;
+    -moz-box-shadow: 0 0 3px 1px #798caa;
+    -webkit-box-shadow: 0 0 3px 1px #9294aa;
+    box-shadow: 0 0 3px 1px #3ca0aa;
     margin: 0.1em 0 0 0;
     border: none;
 }
@@ -506,7 +506,7 @@ th:hover, tr:hover {
 .buttons a {
     background-color: transparent;
     border: 0;
-    color: #666666;
+    color: #1a3966;
     cursor: pointer;
     display: inline-block;
     margin: 0 0.25em 0;
